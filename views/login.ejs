@@ -1,0 +1,57 @@
+<% layout('layout') -%>
+
+<% if (typeof messages !== "undefined" && messages.length > 0) { %>
+<div class = "messages-list">
+    <h3>Form errors:</h3>
+    <ul>
+    <% for (var i = 0; i < messages.length; i += 1) { %>
+        <li><%- messages[i] -%></li>
+    <% } %>
+    </ul>
+</div>
+<% } %>
+
+<h1 class = "logo">kotype</h1>
+
+<div class = "registernote">Alpha version. <a href="mailto:info@kogmbh.com?subject=Register%20for%20info%20on%20kotype">Register</a> for more information!</div>
+
+<% if (typeof authservices !== "undefined" && authservices.length) { %>
+<div id = "oauthForm" class = "oauth-form">
+    <h2>Log in by Services</h2>
+    <% for (var i = 0; i < authservices.length; i += 1) { %>
+    <% if (i > 0) { %>
+    <br/>
+    <% } %>
+    <a class = "signinbyservice" href = "<%- urlPathPrefix -%>/auth/<%- authservices[i].id -%>/"><%- authservices[i].displayName -%></a>
+    <% } %>
+</div>
+<% } %>
+
+<div id = "loginForm" class = "login-form">
+    <h2>Log in by local Account</h2>
+    <form method = "post" action = "<%- urlPathPrefix -%>/login">
+        <input type = "text" placeholder = "Username" name = "username" required></input>
+        <input type = "password" placeholder = "Password" name = "password" required></input>
+        <button class = "button blue" type = "submit">Go</button>
+    </form>
+</div>
+
+<% if (typeof allowsignup !== "undefined" && allowsignup === true) { %>
+<div id = "signupForm" class = "signup-form">
+    <h2>Sign up</h3>
+    <form method = "post" action = "<%- urlPathPrefix -%>/signup" enctype = "multipart/form-data">
+        <div id = "imageUploadButton"><img id = "avatarPreview" class = "avatar-image" src = "<%- urlPathPrefix -%>/images/default-avatar.png"></img></div>
+        <input id = "imageInput" type = "file" name = "avatar"></input>
+        <input type = "text" placeholder = "Username" name = "username" required></input>
+        <input type = "text" placeholder = "Full Name" name = "name" required></input>
+        <input type = "password" placeholder = "Password" name = "password" required></input>
+        <input type = "password" placeholder = "Confirm password" name = "password_repeated" required></input>
+        <button class = "button blue" type = "submit">Create account</button>
+    </form>
+</div>
+
+<div class = "switch-form"><button id = "formSwitch" class = "button red"></button></div>
+<% } %>
+
+<script src="<%- urlPathPrefix -%>/javascripts/login.js"></script>
+<link rel = "stylesheet" type = "text/css" href = "<%- urlPathPrefix -%>/stylesheets/login.css">

@@ -1,0 +1,78 @@
+<% layout('layout') -%>
+
+<% if (typeof user !== "undefined") { %>
+<% if (typeof onlySingleTemplate !== "undefined" && onlySingleTemplate === true && typeof templates !== "undefined" && templates.length) { %>
+  <a class = "create-document button red" href = "<%- urlPathPrefix -%>/template/<%- templates[0]._id -%>/create">Create a new document!</a>
+<% } %>
+
+<% if (typeof allowUpload !== "undefined" && allowUpload === true) { %>
+<div id = "file-uploader" class = "create-document button red">
+    <span>Import from a .odt file!</span>
+    <form method = "post" action = "<%- urlPathPrefix -%>/upload" enctype = "multipart/form-data">
+        <input name = "filesToUpload[]" type = "file" multiple = ""/>
+    </form>
+</div>
+<% } %>
+
+<% if (typeof onlySingleTemplate === "undefined" || onlySingleTemplate === false ) { %>
+<div id = "lists-container">
+    <% if (typeof templates !== "undefined" && templates.length) { %>
+    <div id = "templates" class = "templates document-list">
+        <h2>Templates</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Title</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for (var i = 0; i < templates.length; i += 1) { %>
+                    <tr>
+                        <td><a href = "<%- urlPathPrefix -%>/template/<%- templates[i]._id -%>/create"><%- templates[i].name -%></a></td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+    <% }%>
+<% } %>
+
+    <% if (typeof documents !== "undefined" && documents.length) { %>
+    <div id = "<% if (typeof onlySingleTemplate === "undefined" || onlySingleTemplate === false ) { %>documents<% } else { %>documents-only<% } %>" class = "document-list">
+        <h2>Documents</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Last modified</th>
+                    <th>Editors</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for (var i = 0; i < documents.length; i += 1) { %>
+                    <tr>
+                        <td><a href = "<%- urlPathPrefix -%>/document/<%- documents[i]._id -%>"><%- documents[i].name || "Untitled Document" -%></a></td>
+                        <td>
+                            <div class = "date"><%- (new Date(documents[i].date)).toLocaleDateString() -%></div>
+                            <div class = "time"><%- (new Date(documents[i].date)).toLocaleTimeString() -%></div>
+                        </td>
+                        <td>
+                        <% for (var j = 0; j < documents[i].editors.length; j += 1) { %>
+                            <span>
+                                <span class = "name"><%- documents[i].editors[j].name -%><% if (j < documents[i].editors.length - 1) { %>,<% } %></span>
+                            </span>
+                        <% } %>
+                        </td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+    <% } %>
+</div>
+
+<% if (typeof allowUpload !== "undefined" && allowUpload === true) { %>
+<script src="<%- urlPathPrefix -%>/javascripts/uploader.js"></script>
+<% } %>
+<link rel = "stylesheet" type = "text/css" href = "<%- urlPathPrefix -%>/stylesheets/index.css">
+<% } %>

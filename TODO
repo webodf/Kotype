@@ -1,2 +1,31 @@
-write a nice webservice for collaborative richtext document editing using WebODF
-that everyone can install on their own systems
+TODOs
+-----
+(content to be moved into an issue tracker once kotype has found a long-term home)
+
+
+* Make work with nodejs 0.12.0 and later
+some issue with bcrypt
+
+* Kotype server dies with "Unhandled 'error' event" when the mongodb is temporarily unavailable
+-> make kotype deal with that in a sane way
+
+* support GIF avatars
+gif avatars are not supported yet (upload eats everything though, and silently drops any non-jpg/png)
+avatar pictures stored in cache folder.
+
+Fixing those gifs was done using the mongo shell:
+see: http://docs.mongodb.org/manual/tutorial/query-documents/
+
+mongo --port 31001 # to connect to db server
+> use kotype
+> db.users.find() to get a dump of all
+> db.users.update( { "username" : "marcel" }, { $set: { "avatar_url" : "/cache/2092-1cs3n14.gif" } } )
+> quit()
+
+* support uploads of new documents via conversion server
+
+* simple webodf util to create a new version from a given genesis file and a list of ops
+
+* stop relying on external servers (like ATM done with closure library & CDN)
+
+* add "Delete document" option, to avoid running over

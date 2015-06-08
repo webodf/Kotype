@@ -1,0 +1,9 @@
+{
+  "name": "Kotype",
+  "description": "Collaborative editing webserver",
+  "version": "0.1.0",
+  "dependencies": {
+    "closurelibrary": "*",
+    "moment": "2.7.0"
+  }
+}

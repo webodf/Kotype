@@ -1,0 +1,25 @@
+<html>
+    <head>
+        <title>kotype</title>
+        <meta name="generator" content="kotype v<%- typeof version === "string" ? version : "undefined" -%>">
+        <link rel = "stylesheet" type = "text/css" href = "<%- urlPathPrefix -%>/stylesheets/layout.css">
+        <script>
+            var kotypeGlobals = {
+                urlPathPrefix: "<%- urlPathPrefix -%>",
+                user: <%- typeof user !== "undefined" ? JSON.stringify(user) : "undefined" -%>
+            };
+        </script>
+        <script src="<%- urlPathPrefix -%>/closure/base.js"></script>
+        <script src="<%- urlPathPrefix -%>/javascripts/widgets/UserMenu.js"></script>
+        <script src="<%- urlPathPrefix -%>/javascripts/layoutUI.js"></script>
+    </head>
+    <body>
+        <div class = "navbar">
+            <span class = "logo"></span>
+            <div class = "navbar-right">
+                <div id = "userMenu" class = "navbar-account-display"></div>
+            </div>
+        </div>
+        <%- body -%>
+    </body>
+</html>

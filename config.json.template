@@ -1,0 +1,44 @@
+{
+    "hostname": "0.0.0.0",
+    "port": "3000",
+
+    "urlPathPrefix": "",
+
+    "editorRoot": "../wodo",
+    "resourceRoot": "../resources",
+    "templatesRoot": "../templates",
+    "documentsRoot": "../documents",
+    "cacheRoot": "../cache",
+
+    "onlySingleTemplate": true,
+    "allowUpload": false,
+
+    "mongodbHost": "127.0.0.1",
+    "mongodbPort": "27017",
+    "mongodbName": "kotype",
+
+    "conversionHost": "http://127.0.0.1:16080",
+
+    "cookieSecret": "varisekrit",
+    "ssl": {
+        "key": "../ssl/key.pem",
+        "cert": "../ssl/cert.pem"
+    },
+
+    "allowSignup": true,
+
+    "auth": {
+        "callbackHost": "my.server",
+        "callbackPort": "30001",
+        "github": {
+            "clientID": "yourclientid",
+            "clientSecret": "yourclientsecret"
+        }
+    },
+
+    "whitelist": {
+        "local": {
+            "johndoe": true
+        }
+    }
+}
